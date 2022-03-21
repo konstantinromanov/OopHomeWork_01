@@ -32,9 +32,8 @@ int main()
 
 	cout << "Please enter a set of integers, separated by comma\n";
 
-	getline(cin, inputString);
-
-	//cin >> inputString;
+	//getline(cin, inputString);
+	
 	stringstream ss(inputString);	
 
 	for (int i; ss >> i;)
@@ -46,9 +45,7 @@ int main()
 		}
 	}
 		
-	exercise_1(collection1);
-
-	//printEndOfTaskLine(1);
+	//exercise_1(collection1);	
 
 	// -------------------------------------------------Mandatory exercise 2-------------------------------------------------
 
@@ -59,25 +56,20 @@ int main()
 
 	cout << "Please enter a set of strings, separated by comma\n";
 
-	//cin >> inputString;
+	getline(cin, inputString);	
 
 	int pos = 0;
-
-	/*string token;
-	while ((pos = inputString.find(delimiter)) != std::string::npos) // by mutating original string
-	{
-		token = inputString.substr(0, pos);
-		collection2.push_back(token);
-		inputString.erase(0, pos + delimiter.length());
-	}
-
-	collection2.push_back(inputString);*/
 
 	auto start = 0U;
 	auto end = inputString.find(delimiter);
 	while (end != std::string::npos)
 	{
-		collection2.push_back(inputString.substr(start, end - start));
+		string str = inputString.substr(start, end - start);
+		stringstream trimmer;
+		trimmer << str;
+		str.clear();
+		trimmer >> str;
+		collection2.push_back(str);
 		start = end + delimiter.length();
 		end = inputString.find(delimiter, start);
 	}
