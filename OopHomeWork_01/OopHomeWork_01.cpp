@@ -13,15 +13,10 @@ using namespace std;
 void exercise_1(vector<int> collection);
 void exercise_2(vector<string> collection);
 int exercise_3();
-void bonus_exercise_1(char c);
-//void printEndOfTaskLine(int taskNumber);
-void printLine(int lenght);
 void printStartOfTaskLine(int taskNumber);
-void printIntSqrCubTable(int lowerLimit, int upperLimit);
-
 void ltrim(string& s);
-void rtrim(std::string& s);
-void trim(std::string& s);
+void rtrim(string& s);
+void trim(string& s);
 
 int main()
 {
@@ -35,7 +30,7 @@ int main()
 
 	cout << "Please enter a set of integers, separated by comma\n";
 
-	//getline(cin, inputString);
+	getline(cin, inputString);
 
 	stringstream ss(inputString);
 
@@ -48,7 +43,7 @@ int main()
 		}
 	}
 
-	//exercise_1(collection1);	
+	exercise_1(collection1);
 
 	// -------------------------------------------------Mandatory exercise 2-------------------------------------------------
 
@@ -65,6 +60,7 @@ int main()
 
 	auto start = 0U;
 	auto end = inputString.find(delimiter);
+
 	while (end != string::npos)
 	{
 		string str = inputString.substr(start, end - start);
@@ -84,85 +80,30 @@ int main()
 
 	printStartOfTaskLine(3);
 
-	int result = exercise_3();
-	
-	// bonus_exercise_1('Z');
-
-
-	//printIntSqrCubTable(10, 25);
+	int result = exercise_3();	
 }
 
+void exercise_1(vector<int> collection) {
 
-void printIntSqrCubTable(int lowerLimit, int upperLimit) {
+	int colLenght = collection.size();
+	int left{ 0 };
+	int right{ colLenght - 1 };
+	int sum{ 0 };
+	int count{ 0 };
 
-	printLine(30);
-	cout << right << /*setfill('.') << */setw(10) << "Integer" << setw(10) << "Square" << setw(10) << "Cube" << "\n";
-	printLine(30);
-	for (size_t i = lowerLimit; i <= upperLimit; i++)
+	// sum of first and last, second first and second last etc.
+	while (left <= right)
 	{
-
-		cout << right << /*setfill('.') <<*/ setw(10) << i << setw(10) << pow(i, 2) << setw(10) << pow(i, 3) << "\n";
-		printLine(30);
-
+		sum = collection[left++] + collection[right--];
+		cout << "  sum" << (count++) + 1 << " = " << sum << endl;
 	}
 
-}
-
-void printLine(int lenght) {
-
-	cout << string(lenght, '-') << endl;
-	//cout << "\n-----------------------------------------------------------------------------------\n";
-}
-
-void printStartOfTaskLine(int taskNumber) {
-	cout << "\n-----------------------------------Start of task " << taskNumber << "----------------------------------------------\n";
-}
-
-void bonus_exercise_1(char c) {
-
-	int counter = c - 'A';
-
-	for (size_t i = 0; i <= counter; i++)
-	{
-		/*auto printSpaces = [](int counter, int i) {
-			for (size_t j = 0; j < counter - i; j++)
-			{
-				cout << ' ';
-			}
-		};*/
-
-		//printSpaces(counter, i);
-
-		for (size_t j = 0; j < counter - i; j++)
-		{
-			cout << ' ';
-		}
-
-		for (size_t j = 0; j < i; j++)
-		{
-			char curC = 'A' + j;
-			cout << curC;
-		}
-
-		char curMC = 'A' + i;
-		cout << curMC;
-
-		for (size_t j = i; j > 0; j--)
-		{
-			char curC = 'A' + j - 1;
-			cout << curC;
-		}
-
-		/*for (size_t j = 0; j < i; j++)
-		{
-			char curC = c - (counter - i + j + 1);
-			cout << curC;
-		}*/
-
-		//printSpaces(counter, i);
-
-		cout << endl;
-	}
+	//// sum of adjacent elements.
+	//for (int i = 0; i < colLenght - 1; i++)
+	//{
+	//	int sum = collection[i] + collection[i + 1];
+	//	cout << "i = " << i << "  sum = " << sum << endl;
+	//}
 }
 
 void exercise_2(vector<string> collection) {
@@ -204,30 +145,6 @@ int exercise_3() {
 	return sum;
 }
 
-void exercise_1(vector<int> collection) {
-
-	int colLenght = collection.size();
-	int left{ 0 };
-	int right{ colLenght - 1 };
-	int sum{ 0 };
-	int count{ 0 };
-
-	// sum of first and last, second first and second last etc.
-	while (left <= right)
-	{
-		sum = collection[left++] + collection[right--];
-		cout << "  sum" << count++ << " = " << sum << endl;
-	}
-
-	//// sum of adjacent elements.
-	//for (int i = 0; i < colLenght - 1; i++)
-	//{
-	//	int sum = collection[i] + collection[i + 1];
-	//	cout << "i = " << i << "  sum = " << sum << endl;
-	//}
-}
-
-
 void ltrim(string& s) {
 	s.erase(s.begin(), find_if(s.begin(), s.end(), [](unsigned char ch) {
 		return !isspace(ch);
@@ -245,6 +162,9 @@ void trim(string& s) {
 	rtrim(s);
 }
 
+void printStartOfTaskLine(int taskNumber) {
+	cout << "\n-----------------------------------Start of task " << taskNumber << "----------------------------------------------\n";
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
