@@ -69,31 +69,27 @@ int main()
 	{
 		string str = inputString.substr(start, end - start);
 		trim(str);
-		//str = trimString(str);
 		collection2.push_back(str);
 		start = end + delimiter.length();
 		end = inputString.find(delimiter, start);
 	}
 
 	string str = inputString.substr(start, start);
-	//str = trimString(str);
 	trim(str);
 	collection2.push_back(str);
 
-	//vector<string> collection2{ "str1", "str2", "test3", "rambo", "rimi", "dodge", "retro", "ambitions", "str1", "str2", "test3", "rambo", "rimi", "dodge", "retro", "ambitions" };
 	exercise_2(collection2);
 
 	// -------------------------------------------------Mandatory exercise 3-------------------------------------------------
 
 	printStartOfTaskLine(3);
 
-	//int result = exercise_3();
-	//printEndOfTaskLine(3);
-
+	int result = exercise_3();
+	
 	// bonus_exercise_1('Z');
 
 
-	printIntSqrCubTable(10, 25);
+	//printIntSqrCubTable(10, 25);
 }
 
 
@@ -171,16 +167,20 @@ void bonus_exercise_1(char c) {
 
 void exercise_2(vector<string> collection) {
 
-	for (int i = 0; i < collection.size(); i++)
+	int colLength = collection.size();
+
+	for (int i = 0; i < colLength; i++)
 	{
 		string str = collection[i];
 		transform(str.begin(), str.end(), str.begin(), toupper);
 		collection[i] = str;
 	}
 
-	for (int i = 0; i < collection.size(); i++)
+	cout << "Transformed collection: " << endl;
+
+	for (int i = 0; i < colLength; i++)
 	{
-		cout << (i % 8 == 0 && i != 0 ? "\n" : "") << collection[i] << "  ";
+		cout << (i % 8 == 0 && i != 0 ? "\n" : "") << collection[i] << (i < colLength - 1 ? ", " : "");
 	}
 }
 
