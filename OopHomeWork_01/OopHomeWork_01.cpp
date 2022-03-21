@@ -19,6 +19,9 @@ void printLine(int lenght);
 void printStartOfTaskLine(int taskNumber);
 void printIntSqrCubTable(int lowerLimit, int upperLimit);
 
+void ltrim(string& s);
+void rtrim(std::string& s);
+void trim(std::string& s);
 
 int main()
 {
@@ -33,8 +36,8 @@ int main()
 	cout << "Please enter a set of integers, separated by comma\n";
 
 	//getline(cin, inputString);
-	
-	stringstream ss(inputString);	
+
+	stringstream ss(inputString);
 
 	for (int i; ss >> i;)
 	{
@@ -44,7 +47,7 @@ int main()
 			ss.ignore();
 		}
 	}
-		
+
 	//exercise_1(collection1);	
 
 	// -------------------------------------------------Mandatory exercise 2-------------------------------------------------
@@ -56,42 +59,29 @@ int main()
 
 	cout << "Please enter a set of strings, separated by comma\n";
 
-	getline(cin, inputString);	
+	getline(cin, inputString);
 
 	int pos = 0;
 
 	auto start = 0U;
 	auto end = inputString.find(delimiter);
-	while (end != std::string::npos)
+	while (end != string::npos)
 	{
 		string str = inputString.substr(start, end - start);
-		stringstream trimmer;
-		trimmer << str;
-		str.clear();
-		trimmer >> str;
+		trim(str);
+		//str = trimString(str);
 		collection2.push_back(str);
 		start = end + delimiter.length();
 		end = inputString.find(delimiter, start);
 	}
 
-	collection2.push_back(inputString.substr(start, end));
-
-	//stringstream ss(inputString);
-	/*stringstream ss2(inputString);
-
-	for (int i; ss2 >> i;)
-	{
-		collection2.push_back(i);
-		if (ss2.peek() == ',');
-		{
-			ss2.ignore();
-		}
-	}*/
-
+	string str = inputString.substr(start, start);
+	//str = trimString(str);
+	trim(str);
+	collection2.push_back(str);
 
 	//vector<string> collection2{ "str1", "str2", "test3", "rambo", "rimi", "dodge", "retro", "ambitions", "str1", "str2", "test3", "rambo", "rimi", "dodge", "retro", "ambitions" };
-	//exercise_2(collection2);
-	//printEndOfTaskLine(2);
+	exercise_2(collection2);
 
 	// -------------------------------------------------Mandatory exercise 3-------------------------------------------------
 
@@ -106,6 +96,7 @@ int main()
 	printIntSqrCubTable(10, 25);
 }
 
+
 void printIntSqrCubTable(int lowerLimit, int upperLimit) {
 
 	printLine(30);
@@ -113,7 +104,7 @@ void printIntSqrCubTable(int lowerLimit, int upperLimit) {
 	printLine(30);
 	for (size_t i = lowerLimit; i <= upperLimit; i++)
 	{
-		
+
 		cout << right << /*setfill('.') <<*/ setw(10) << i << setw(10) << pow(i, 2) << setw(10) << pow(i, 3) << "\n";
 		printLine(30);
 
@@ -183,7 +174,7 @@ void exercise_2(vector<string> collection) {
 	for (int i = 0; i < collection.size(); i++)
 	{
 		string str = collection[i];
-		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		transform(str.begin(), str.end(), str.begin(), toupper);
 		collection[i] = str;
 	}
 
@@ -236,6 +227,23 @@ void exercise_1(vector<int> collection) {
 	//}
 }
 
+
+void ltrim(string& s) {
+	s.erase(s.begin(), find_if(s.begin(), s.end(), [](unsigned char ch) {
+		return !isspace(ch);
+		}));
+}
+
+void rtrim(string& s) {
+	s.erase(find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
+		return !isspace(ch);
+		}).base(), s.end());
+}
+
+void trim(string& s) {
+	ltrim(s);
+	rtrim(s);
+}
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
