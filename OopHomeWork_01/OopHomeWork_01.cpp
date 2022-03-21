@@ -32,7 +32,9 @@ int main()
 
 	cout << "Please enter a set of integers, separated by comma\n";
 
-	cin >> inputString;
+	getline(cin, inputString);
+
+	//cin >> inputString;
 	stringstream ss(inputString);	
 
 	for (int i; ss >> i;)
@@ -44,7 +46,7 @@ int main()
 		}
 	}
 		
-	//exercise_1(collection1);
+	exercise_1(collection1);
 
 	//printEndOfTaskLine(1);
 
@@ -222,19 +224,24 @@ int exercise_3() {
 void exercise_1(vector<int> collection) {
 
 	int colLenght = collection.size();
-	// sum of adjacent elements.
-	/*for (int i = 0; i < colLenght - 1; i++)
-	{
-		int sum = collection[i] + collection[i + 1];
-		cout << "i = " << i << "  sum = " << sum << endl;
-	}*/
+	int left{ 0 };
+	int right{ colLenght - 1 };
+	int sum{ 0 };
+	int count{ 0 };
 
 	// sum of first and last, second first and second last etc.
-	for (int i = 0; i < colLenght / 2; i++)
+	while (left <= right)
 	{
-		int sum = collection[i] + collection[colLenght - 1 - i];
-		cout << "i = " << i << "  sum = " << sum << endl;
+		sum = collection[left++] + collection[right--];
+		cout << "  sum" << count++ << " = " << sum << endl;
 	}
+
+	//// sum of adjacent elements.
+	//for (int i = 0; i < colLenght - 1; i++)
+	//{
+	//	int sum = collection[i] + collection[i + 1];
+	//	cout << "i = " << i << "  sum = " << sum << endl;
+	//}
 }
 
 
